@@ -1,105 +1,319 @@
-/* ===== Variables : les couleurs et tailles réutilisées partout ===== */
+/* =========================================================
+   Antoine Philippoteaux — CV
+   Direction : fond crème, encre noire, traits nets,
+   et un "fil" vertical qui relie toutes les sections.
+   ========================================================= */
+
+/* ===== Variables ===== */
 :root {
-  --text: #1f2937;
-  --muted: #6b7280;
-  --accent: #0f766e;
-  --bg: #fafaf9;
-  --card: #ffffff;
-  --border: #e7e5e4;
+  --cream: #f7f2e8;        /* fond de page */
+  --cream-dark: #ebe3d3;   /* blocs photo en attente */
+  --ink: #151515;          /* texte et traits */
+  --muted: #5e584d;        /* texte secondaire */
+  --track: #d8cfbd;        /* fil "vide" */
+
+  --display: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --mono: "JetBrains Mono", "Courier New", monospace;
+
+  --pad: clamp(1.25rem, 4vw, 3rem);   /* marge latérale fluide */
+  --gutter: 88px;                     /* largeur réservée au fil */
+  --line-x: 24px;                     /* position du fil dans cette marge */
+  --max: 1120px;
 }
 
 /* ===== Base ===== */
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--display);
+  font-size: 1.0625rem;
   line-height: 1.6;
-  color: var(--text);
-  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
 }
 
-header,
-main,
-footer {
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 0 20px;
+h1, h2, h3, p, figure {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+::selection {
+  background: var(--ink);
+  color: var(--cream);
+}
+
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+/* Petites étiquettes en police "machine" */
+.label {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Bloc gris-crème affiché tant qu'une photo manque */
+.placeholder {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  background: var(--cream-dark);
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ===== Barre du haut (reste collée en haut) ===== */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem var(--pad);
+  background: var(--cream);
+  border-bottom: 1.5px solid var(--ink);
+}
+
+.topbar-name {
+  font-weight: 900;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+
+.topbar-nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.topbar-nav a {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+}
+
+.topbar-nav a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 /* ===== En-tête ===== */
-header {
-  padding-top: 64px;
-  padding-bottom: 32px;
+.hero {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: clamp(3rem, 8vw, 6rem) var(--pad) clamp(3rem, 6vw, 5rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(200px, 24vw, 290px);
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: end;
 }
 
-h1 {
-  font-size: 2.6rem;
-  line-height: 1.1;
-  margin: 0 0 12px;
+.hero h1 {
+  margin: 1rem 0 1.5rem;
+  /* "PHILIPPOTEAUX" fait ~8,4 fois la taille de police : on la plafonne pour qu'il tienne */
+  font-size: clamp(2.4rem, 6vw, 4.9rem);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
 }
 
 .tagline {
-  font-size: 1.25rem;
-  color: var(--accent);
-  font-weight: 600;
-  margin: 0 0 16px;
+  font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+  font-weight: 700;
+  line-height: 1.3;
+  max-width: 30ch;
+  margin-bottom: 1rem;
 }
 
 .intro {
   color: var(--muted);
-  font-size: 1.05rem;
+  max-width: 62ch;
 }
 
-/* ===== Navigation ===== */
-nav {
+/* Boutons */
+.cta {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 24px;
+  gap: 0.75rem;
+  margin-top: 2rem;
 }
 
-nav a {
+.btn {
+  display: inline-block;
+  padding: 0.8rem 1.3rem;
+  border: 1.5px solid var(--ink);
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
   text-decoration: none;
-  color: var(--text);
-  border: 1px solid var(--border);
-  background: var(--card);
-  padding: 6px 14px;
-  border-radius: 999px;
-  font-size: 0.9rem;
+  transition: background 0.15s, color 0.15s;
 }
 
-nav a:hover {
-  border-color: var(--accent);
-  color: var(--accent);
+.btn:hover,
+.btn-primary {
+  background: var(--ink);
+  color: var(--cream);
+}
+
+.btn-primary:hover {
+  background: transparent;
+  color: var(--ink);
+}
+
+/* Photo de profil */
+.portrait {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.portrait > :first-child {
+  aspect-ratio: 4 / 5;
+  border: 1.5px solid var(--ink);
+}
+
+.portrait .placeholder {
+  font-family: var(--display);
+  font-size: 4rem;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+}
+
+/* ===== Le fil directeur ===== */
+.thread {
+  position: relative;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--pad) 2rem calc(var(--pad) + var(--gutter));
+}
+
+/* Le fil "vide" en arrière-plan... */
+.thread::before,
+.thread::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(var(--pad) + var(--line-x));
+  width: 2px;
+}
+
+.thread::before {
+  background: var(--track);
+}
+
+/* ...et le fil noir qui se remplit au défilement (piloté par script.js) */
+.thread::after {
+  background: var(--ink);
+  transform-origin: top;
+  transform: scaleY(var(--progress, 0));
 }
 
 /* ===== Sections ===== */
-section {
-  padding: 32px 0;
-  border-top: 1px solid var(--border);
+.block {
+  padding: 3.5rem 0 1rem;
+  scroll-margin-top: 4rem;
 }
 
-h2 {
-  font-size: 1.4rem;
-  margin: 0 0 20px;
+.block-head {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--ink);
 }
 
-/* ===== Expériences ===== */
-.entry {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-left: 4px solid var(--accent);
-  border-radius: 8px;
-  padding: 20px 24px;
-  margin-bottom: 16px;
+/* Le carré posé sur le fil, devant chaque section */
+.block-head::before {
+  content: "";
+  position: absolute;
+  top: 0.55em;
+  left: calc(var(--line-x) + 1px - 8px - var(--gutter));
+  width: 16px;
+  height: 16px;
+  background: var(--cream);
+  border: 2px solid var(--ink);
+  transition: background 0.3s;
 }
 
-.entry h3 {
-  margin: 0;
-  font-size: 1.1rem;
+.block.is-reached .block-head::before {
+  background: var(--ink);
+}
+
+.block-num {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.block-head h2 {
+  font-size: clamp(1.9rem, 4.5vw, 3.2rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+/* ===== Lignes : formation & expériences ===== */
+.row {
+  display: grid;
+  grid-template-columns: 9rem minmax(0, 1fr);
+  gap: 1.5rem;
+  padding: 1.75rem 0;
+}
+
+.row + .row {
+  border-top: 1px solid var(--ink);
+}
+
+.row-date {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  padding-top: 0.2rem;
+  color: var(--muted);
+}
+
+.row h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.35;
+  margin-bottom: 0.5rem;
 }
 
 .role {
@@ -107,64 +321,156 @@ h2 {
   color: var(--muted);
 }
 
-.meta {
-  margin: 4px 0 12px;
-  font-size: 0.85rem;
+.row p:not(.row-date) {
+  max-width: 68ch;
+}
+
+/* ===== Projets ===== */
+.project {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 3rem);
+  padding: 2.25rem 0;
+  align-items: start;
+}
+
+.project + .project {
+  border-top: 1px solid var(--ink);
+}
+
+.project-media {
+  aspect-ratio: 4 / 3;
+  border: 1.5px solid var(--ink);
+  overflow: hidden;
+}
+
+.project-text h3 {
+  font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0.4rem 0 0.9rem;
+}
+
+.project-text p:not(.label) {
   color: var(--muted);
 }
 
-.entry p:last-child {
-  margin-bottom: 0;
+/* ===== Contact ===== */
+.footer {
+  max-width: var(--max);
+  margin: 2rem auto 0;
+  padding: 3rem var(--pad) 2rem;
+  border-top: 2px solid var(--ink);
 }
 
-/* ===== Pied de page ===== */
-footer {
-  padding-top: 32px;
-  padding-bottom: 64px;
-  border-top: 1px solid var(--border);
+.footer-mail {
+  display: block;
+  margin: 0.75rem 0 3rem;
+  font-size: clamp(1.5rem, 5vw, 3.6rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.footer-mail:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 6px;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
   color: var(--muted);
 }
 
-a {
-  color: var(--accent);
+.footer-links {
+  display: flex;
+  gap: 1.5rem;
 }
 
-/* ===== Mobile : écrans de moins de 600px ===== */
-@media (max-width: 600px) {
-  h1 {
-    font-size: 2rem;
+/* ===== Animations (seulement si le visiteur ne les a pas désactivées) ===== */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
   }
-  header {
-    padding-top: 40px;
+
+  .hero > * {
+    animation: rise 0.7s ease-out both;
   }
-  .entry {
-    padding: 16px;
+
+  .hero > :nth-child(2) {
+    animation-delay: 0.15s;
   }
-}
-/* ===== Mode sombre : on redéfinit juste les variables ===== */
-body.dark {
-  --text: #e7e5e4;
-  --muted: #a8a29e;
-  --accent: #2dd4bf;
-  --bg: #1c1917;
-  --card: #292524;
-  --border: #44403c;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
 }
 
-body {
-  transition: background 0.3s, color 0.3s;
+/* ===== Tablette ===== */
+@media (max-width: 860px) {
+  .hero {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .portrait {
+    order: -1;              /* la photo passe au-dessus du nom */
+    width: 160px;
+  }
+
+  .hero h1 {
+    font-size: clamp(1.8rem, 9.5vw, 4.9rem);
+  }
+
+  .project {
+    grid-template-columns: 1fr;
+  }
 }
 
-/* ===== Bouton thème ===== */
-#theme-toggle {
-  position: fixed;
-  top: 16px;
-  right: 16px;
-  font-size: 1.2rem;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  width: 44px;
-  height: 44px;
-  cursor: pointer;
+/* ===== Mobile ===== */
+@media (max-width: 560px) {
+  :root {
+    --gutter: 36px;
+    --line-x: 6px;
+  }
+
+  .topbar-name {
+    white-space: nowrap;
+  }
+
+  .topbar-nav a:not(:last-child) {
+    display: none;          /* sur téléphone, on ne garde que "Contact" */
+  }
+
+  .row {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+
+  .block-head {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .block-head::before {
+    top: 0.2em;
+  }
 }
