@@ -1,0 +1,143 @@
+/* ===== Variables : les couleurs et tailles réutilisées partout ===== */
+:root {
+  --text: #1f2937;
+  --muted: #6b7280;
+  --accent: #0f766e;
+  --bg: #fafaf9;
+  --card: #ffffff;
+  --border: #e7e5e4;
+}
+
+/* ===== Base ===== */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+}
+
+header,
+main,
+footer {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ===== En-tête ===== */
+header {
+  padding-top: 64px;
+  padding-bottom: 32px;
+}
+
+h1 {
+  font-size: 2.6rem;
+  line-height: 1.1;
+  margin: 0 0 12px;
+}
+
+.tagline {
+  font-size: 1.25rem;
+  color: var(--accent);
+  font-weight: 600;
+  margin: 0 0 16px;
+}
+
+.intro {
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+/* ===== Navigation ===== */
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--text);
+  border: 1px solid var(--border);
+  background: var(--card);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+}
+
+nav a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ===== Sections ===== */
+section {
+  padding: 32px 0;
+  border-top: 1px solid var(--border);
+}
+
+h2 {
+  font-size: 1.4rem;
+  margin: 0 0 20px;
+}
+
+/* ===== Expériences ===== */
+.entry {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin-bottom: 16px;
+}
+
+.entry h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.role {
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.meta {
+  margin: 4px 0 12px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.entry p:last-child {
+  margin-bottom: 0;
+}
+
+/* ===== Pied de page ===== */
+footer {
+  padding-top: 32px;
+  padding-bottom: 64px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+}
+
+a {
+  color: var(--accent);
+}
+
+/* ===== Mobile : écrans de moins de 600px ===== */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 2rem;
+  }
+  header {
+    padding-top: 40px;
+  }
+  .entry {
+    padding: 16px;
+  }
+}
