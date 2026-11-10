@@ -141,3 +141,30 @@ a {
     padding: 16px;
   }
 }
+/* ===== Mode sombre : on redéfinit juste les variables ===== */
+body.dark {
+  --text: #e7e5e4;
+  --muted: #a8a29e;
+  --accent: #2dd4bf;
+  --bg: #1c1917;
+  --card: #292524;
+  --border: #44403c;
+}
+
+body {
+  transition: background 0.3s, color 0.3s;
+}
+
+/* ===== Bouton thème ===== */
+#theme-toggle {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  font-size: 1.2rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+}
